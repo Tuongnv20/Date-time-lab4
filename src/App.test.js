@@ -8,6 +8,8 @@ describe('DateTimeChecker', () => {
     render(<DateTimeChecker />);
   });
 
+
+
   test('UTCID001', () => {
     const { getByLabelText, getByText } = render(<DateTimeChecker />);
     const dayInput = getByLabelText('Day:');
@@ -17,10 +19,10 @@ describe('DateTimeChecker', () => {
 
     fireEvent.change(dayInput, { target: { value: '30' } });
     fireEvent.change(monthInput, { target: { value: '4' } });
-    fireEvent.change(yearInput, { target: { value: '2000' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('30/4/2000 is NOT a correct date time');
+    const successMessage = getByText('30/4/2023 is a correct date time');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -32,11 +34,11 @@ describe('DateTimeChecker', () => {
     const checkButton = getByText('Check');
 
     fireEvent.change(dayInput, { target: { value: '31' } });
-    fireEvent.change(monthInput, { target: { value: '6' } });
-    fireEvent.change(yearInput, { target: { value: '2009' } });
+    fireEvent.change(monthInput, { target: { value: '5' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('31/6/2009 is NOT a correct date time');
+    const successMessage = getByText('31/5/2023 is a correct date time');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -47,14 +49,15 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '30' } });
-    fireEvent.change(monthInput, { target: { value: '5' } });
-    fireEvent.change(yearInput, { target: { value: '2000' } });
+    fireEvent.change(dayInput, { target: { value: '31' } });
+    fireEvent.change(monthInput, { target: { value: '4' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for day is incorrect format');
+    const successMessage = getByText('31/4/2023 is NOT a correct date time');
     expect(successMessage).toBeInTheDocument();
   });
+
 
   test('UTCID004', () => {
     const { getByLabelText, getByText } = render(<DateTimeChecker />);
@@ -63,12 +66,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '32' } });
-    fireEvent.change(monthInput, { target: { value: '4' } });
-    fireEvent.change(yearInput, { target: { value: '2020' } });
+    fireEvent.change(dayInput, { target: { value: '' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for day is out of range');
+    const successMessage = getByText('Input data for Day is null');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -80,15 +83,14 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '28' } });
-    fireEvent.change(monthInput, { target: { value: '' } });
-    fireEvent.change(yearInput, { target: { value: '2018' } });
+    fireEvent.change(dayInput, { target: { value: 'a' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for day is null');
+    const successMessage = getByText('Input data for Day is incorrect format');
     expect(successMessage).toBeInTheDocument();
   });
-
 
   test('UTCID006', () => {
     const { getByLabelText, getByText } = render(<DateTimeChecker />);
@@ -97,12 +99,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '31' } });
-    fireEvent.change(monthInput, { target: { value: '5' } });
-    fireEvent.change(yearInput, { target: { value: '2020' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: '' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('31/5/2020 is a correct date time');
+    const successMessage = getByText('Input data for Month is null');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -113,12 +115,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '29' } });
-    fireEvent.change(monthInput, { target: { value: '2' } });
-    fireEvent.change(yearInput, { target: { value: '2000' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: 'aa' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('29/2/2000 is NOT a correct date time');
+    const successMessage = getByText('Input data for Month is incorrect format');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -129,28 +131,28 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '29' } });
-    fireEvent.change(monthInput, { target: { value: '2' } });
-    fireEvent.change(yearInput, { target: { value: '2020' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: '' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('29/2/2020 is a correct date time');
+    const successMessage = getByText('Input data for Year is null');
     expect(successMessage).toBeInTheDocument();
   });
 
-  test('UTCID009', () => {
+  test('UTCID09', () => {
     const { getByLabelText, getByText } = render(<DateTimeChecker />);
     const dayInput = getByLabelText('Day:');
     const monthInput = getByLabelText('Month:');
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '31' } });
-    fireEvent.change(monthInput, { target: { value: '6' } });
-    fireEvent.change(yearInput, { target: { value: '2018' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: 'aaaa' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('31/6/2018 is NOT a correct date time');
+    const successMessage = getByText('Input data for Year is incorrect format');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -161,12 +163,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '' } });
-    fireEvent.change(monthInput, { target: { value: '6' } });
-    fireEvent.change(yearInput, { target: { value: '2020' } });
+    fireEvent.change(dayInput, { target: { value: '29' } });
+    fireEvent.change(monthInput, { target: { value: '2' } });
+    fireEvent.change(yearInput, { target: { value: '2024' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for day is out of range');
+    const successMessage = getByText('29/2/2024 is a correct date time');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -177,12 +179,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '18' } });
-    fireEvent.change(monthInput, { target: { value: '8' } });
-    fireEvent.change(yearInput, { target: { value: 'aaaa' } });
+    fireEvent.change(dayInput, { target: { value: '29' } });
+    fireEvent.change(monthInput, { target: { value: '2' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for year is incorrect format');
+    const successMessage = getByText('29/2/2023 is NOT a correct date time');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -193,12 +195,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: 'a' } });
-    fireEvent.change(monthInput, { target: { value: '4' } });
-    fireEvent.change(yearInput, { target: { value: '2000' } });
+    fireEvent.change(dayInput, { target: { value: '32' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for day is incorrect format');
+    const successMessage = getByText('Input data for Day is out of range');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -209,12 +211,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '18' } });
-    fireEvent.change(monthInput, { target: { value: '13' } });
-    fireEvent.change(yearInput, { target: { value: '2000' } });
+    fireEvent.change(dayInput, { target: { value: '0' } });
+    fireEvent.change(monthInput, { target: { value: '1' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for year is null');
+    const successMessage = getByText('Input data for Day is out of range');
     expect(successMessage).toBeInTheDocument();
   });
 
@@ -225,13 +227,14 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '15' } });
-    fireEvent.change(monthInput, { target: { value: 'May' } });
-    fireEvent.change(yearInput, { target: { value: '2018' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: '13' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('Input data for month is incorrect format');
+    const successMessage = getByText('Input data for Month is out of range');
     expect(successMessage).toBeInTheDocument();
+
   });
 
   test('UTCID015', () => {
@@ -241,12 +244,12 @@ describe('DateTimeChecker', () => {
     const yearInput = getByLabelText('Year:');
     const checkButton = getByText('Check');
 
-    fireEvent.change(dayInput, { target: { value: '31' } });
-    fireEvent.change(monthInput, { target: { value: '2' } });
-    fireEvent.change(yearInput, { target: { value: '2012' } });
+    fireEvent.change(dayInput, { target: { value: '30' } });
+    fireEvent.change(monthInput, { target: { value: '0' } });
+    fireEvent.change(yearInput, { target: { value: '2023' } });
     fireEvent.click(checkButton);
 
-    const successMessage = getByText('31/2/2012 is NOT a correct date time');
+    const successMessage = getByText('Input data for Month is out of range');
     expect(successMessage).toBeInTheDocument();
 
   });

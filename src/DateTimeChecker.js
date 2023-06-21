@@ -9,32 +9,36 @@ function DateTimeChecker() {
 
   function checkDateTime() {
     if (day === "") {
-      showMessage("Input data for day is null");
+      //showMessage("Input data for day is null");  //Correct
+      showMessage('Input data for Day is out of range') //Defect
       return;
     }
 
     if (month === "") {
-      showMessage("Input data for month is null");
+      showMessage("Input data for Month is null");
       return;
     }
 
     if (year === "") {
-      showMessage("Input data for year is null");
+      //showMessage("Input data for year is null"); //Correct
+      showMessage('Input data for Year is out of range') //Defect
       return;
     }
 
     if (!isNumeric(day)) {
-      showMessage("Input data for day is incorrect format");
+      //showMessage("Input data for day is incorrect format"); //Correct
+      showMessage('Input data for Day is null') //Defect
       return;
     }
 
     if (!isNumeric(month)) {
-      showMessage("Input data for month is incorrect format");
+      showMessage("Input data for Month is incorrect format");
       return;
     }
 
     if (!isNumeric(year)) {
-      showMessage("Input data for year is incorrect format");
+      //showMessage("Input data for year is incorrect format"); //Correct
+      showMessage('Input data for Year is null')
       return;
     }
 
@@ -43,17 +47,19 @@ function DateTimeChecker() {
     const yearValue = parseInt(year);
 
     if (dayValue < 1 || dayValue > 31) {
-      showMessage("Input data for day is out of range");
+      //showMessage("Input data for day is out of range");//Correct
+      showMessage('Input data for Month is out of range')
       return;
     }
 
     if (monthValue < 1 || monthValue > 12) {
-      showMessage("Input data for month is out of range");
+      //showMessage("Input data for Month is out of range"); //Correct
+      showMessage('Input data for Day is out of range')
       return;
     }
 
     if (yearValue < 1000 || yearValue > 3000) {
-      showMessage("Input data for year is out of range");
+      showMessage("Input data for Year is out of range");
       return;
     }
 
